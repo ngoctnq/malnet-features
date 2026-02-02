@@ -1,0 +1,56 @@
+out_dir: results
+metric_best: accuracy
+wandb:
+  use: False
+  project: malnet
+  entity: <redacted>
+dataset:
+  format: MalNetTinyFeaturesCommon # +keepisolated
+  name: zero+base+ldp # trim/prune/zero (+base/llm/all) (+ldp/constant/degree)
+  task: graph
+  task_type: classification
+  transductive: False
+  node_encoder: True
+  node_encoder_name: LinearNode
+  edge_encoder: True
+  edge_encoder_name: DummyEdge
+  edge_encoder_bn: False
+prep:
+  exp: False
+  add_edge_index: True # Set True if you want to add real edges beside expander edges
+  num_virt_node: 4 # Set True if you want to add global node connections beside expander edges
+posenc_ERN:
+  enable: False
+  model: Linear
+  dim_pe: 8
+  layers: 2
+model:
+  type: MultiModel
+  loss_fun: cross_entropy
+  edge_decoding: dot
+  graph_pooling: max
+gt:
+  layer_type: CustomGatedGCN+Exphormer # some other options: Exphormer, GINE+Exphormer, GINE, GINE__exp
+  layers: 5
+  n_heads: 4
+  dim_hidden: 64  # `gt.dim_hidden` must match `gnn.dim_inner`
+  dropout: 0.0
+  attn_dropout: 0.2
+  layer_norm: False
+  batch_norm: True
+gnn:
+  head: default
+  layers_pre_mp: 1
+  layers_post_mp: 3  # Not used when `gnn.head: san_graph`
+  dim_inner: 64  # `gt.dim_hidden` must match `gnn.dim_inner`
+  batchnorm: True
+  act: relu
+  dropout: 0.0
+  agg: mean
+  normalize_adj: False
+train:
+  mode: inference-only
+  batch_size: 16
+pretrained:
+  dir: results/mntf_zero+base+ldp_xfm
+  reset_prediction_head: False

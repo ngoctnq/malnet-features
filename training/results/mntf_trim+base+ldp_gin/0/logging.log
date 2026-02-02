@@ -1,0 +1,13 @@
+GPU Mem: [10239    44]
+GPU Prob: [0. 1.]
+Random select GPU, select GPU 1 with mem: 44
+[*] Run ID 0: seed=0, split_index=0
+    Starting now: 2026-02-01 17:59:31.577395
+Computing "trim+base+ldp" node features for MalNetTinyFeatures-.
+[*] Loaded dataset 'trim+base+ldp' from 'MalNetTinyFeatures':
+  Data(x=[7051227, 206], edge_index=[2, 14299688], y=[5000], num_nodes=7051227)
+  num graphs: 5000
+  avg num_nodes/graph: 1410
+  num node features: 206
+  num edge features: 0
+  num classes: 5
