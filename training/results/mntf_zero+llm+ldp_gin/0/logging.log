@@ -1,0 +1,12 @@
+GPU Mem: [11345 11366]
+Greedy select GPU, select GPU 0 with mem: 11345
+[*] Run ID 0: seed=0, split_index=0
+    Starting now: 2026-02-01 19:11:26.384466
+Computing "zero+llm+ldp" node features for MalNetTinyFeatures-.
+[*] Loaded dataset 'zero+llm+ldp' from 'MalNetTinyFeatures':
+  Data(x=[7051227, 2309], edge_index=[2, 14299688], y=[5000], num_nodes=7051227)
+  num graphs: 5000
+  avg num_nodes/graph: 1410
+  num node features: 2309
+  num edge features: 0
+  num classes: 5
