@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Quantifying the Generalization Gap: A New Benchmark for Out-of-Distribution Graph-Based Android Malware Classification">
+  <meta name="keywords" content="Android Malware, Graph Neural Networks, LLM, Distribution Shift, MalNet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quantifying the Generalization Gap: A New Benchmark for Out-of-Distribution Graph-Based Android Malware Classification</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">Quantifying the Generalization Gap: A New Benchmark for Out-of-Distribution</h1>
+          <h2 class="subtitle is-3 publication-subtitle">Graph-Based Android Malware Classification</h2>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Ngoc N. Tran<sup>1</sup>,</span>
+            <span class="author-block">Anwar Said<sup>1</sup>,</span>
+            <span class="author-block">Waseem Abbas<sup>2</sup>,</span>
+            <span class="author-block">Tyler Derr<sup>1</sup>,</span>
+            <span class="author-block">Xenofon D. Koutsoukos<sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="affiliation-block"><sup>1</sup>Vanderbilt University</span>
+            <span class="affiliation-block"><sup>2</sup>The University of Texas at Dallas</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2508.06734"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ngoctnq/malnet-features"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Data Link. -->
+              <span class="link-block">
+                <a href="#dataset"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Graph malware classifiers achieve high accuracy on standard benchmarks but suffer significantly under distribution shift when new malware variants emerge. Our research highlights that existing structural features fail to capture the deeper semantic patterns necessary for robust generalization.
+          </p>
+          <p>
+            We introduce two new benchmarks, <strong style="color:#7851A9">MalNet-Tiny-Common</strong> and <strong style="color:#228B22">MalNet-Tiny-Distinct</strong>, designed to evaluate performance under realistic covariate and domain shifts. We propose a <strong>semantic enrichment framework</strong> that augments Function Call Graphs (FCGs) with function-level metadata and code embeddings derived from Large Language Models (LLMs).
+          </p>
+          <p>
+            Evaluations demonstrated that our data-centric methodology outperforms model-based approaches under distribution shift, and consistently further enhances robustness when used in conjunction.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+           <p>
+              Below is an overview of the data construction pipeline of our work.
+              Please consult our <code>README.md</code> files for detailed information.
+           </p>
+        </div>
+        <img src="static/images/architecture.png" alt="Architecture Diagram" class="architecture-image"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dataset">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Dataset</h2>
+        
+        <div class="content has-text-justified">
+          <h3 class="title is-4">Curation</h3>
+          <div class="content has-text-justified">
+            <p>
+              The dataset curation process involved several stages to ensure high-quality, semantically enriched benchmarks:
+            </p>
+            <ol>
+              <li><strong>Sample Selection:</strong> We selected malware samples from the <strong>MalNet</strong> database, focusing on families that represent shifts in distribution with respect to the original MalNet-Tiny benchmark:</li>
+                <ul>
+                  <li><strong style="color:#7851A9">MalNet-Tiny-Common</strong>: Malwares of the same <b>families</b> but different malware <b>types</b>, simulating <i>covariance shift</i>.</li>
+                  <li><strong style="color:#228B22">MalNet-Tiny-Distinct</strong>: Malwares of completely different <b>families</b>, simulating a more drastic <i>domain shift</i>.</li>
+                </ul>
+              <li><strong>APK Acquisition:</strong> Raw binaries (.apk files) were retrieved from <strong>AndroZoo</strong> using SHA256 hashes provided by MalNet.</li>
+              <li><strong>Graph Extraction:</strong> For each APK, we extracted the FCGs using static analysis tools, identifying all function nodes and their call relationships.</li>
+              <li><strong>Semantic Enrichment:</strong> Each node in the FCG was augmented with:
+                <ul>
+                  <li><strong>Function Metadata:</strong> Including information such as function names, access modifiers, return types, and parameters.</li>
+                  <li><strong>LLM Embeddings:</strong> High-dimensional vector representations of the function's bytecode/source code using state-of-the-art LLMs (e.g., CodeXEmbed, Qwen 3).</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+
+          <h3 class="title is-4">Download</h3>
+          <div class="content has-text-justified">
+            <p>
+              The pre-processed attributed graphs (including all semantic embeddings) will be released as downloadable files. These files allow researchers to train and evaluate models without performing the expensive LLM inference step themselves. Due to the large size of the dataset, we provide links to download the datasets across multiple platforms &mdash; please download <b><u>all</u></b> below links and merge them in the <code>datasets</code> directory.
+            </p>
+            <p>
+              You can download the datasets from the following links:
+            </p>
+            <ul>
+              <li>
+                <a href="https://huggingface.co/datasets/nntvu/MalNet-Tiny-Features" target="_blank">HuggingFace</a>
+              </li>
+              <li>
+                <a href="https://drive.google.com/drive/folders/1TBdazdqkv5lieUHgczyXmhWgwUyJ83Ne" target="_blank">Google Drive</a>
+              </li>
+            </ul>
+            <!-- <div class="has-text-centered">
+              <a class="button is-large download-button" href="https://huggingface.co/datasets/nntvu/MalNet-Tiny-Features" target="_blank">
+                <span class="icon">
+                  <i class="fas fa-download"></i>
+                </span>
+                <span>Download Dataset</span>
+              </a>
+            </div> -->
+          </div>
+          
+          <h3 class="title is-4">Dataset Construction</h3>
+          <div class="content has-text-justified">
+            <p>
+              We provide our code to construct our dataset from any APKs, ensuring compliance with AndroZoo's <a href="https://androzoo.uni.lu/access">redistribution policies</a>.
+            </p>
+            
+            <h4 class="title is-5">1. Setup</h4>
+            <p>Install the necessary dependencies:</p>
+            <pre><code>pip install -r requirements.txt</code></pre>
+
+            <h4 class="title is-5">2. LLM Embedding Server</h4>
+            <p>Start the inference server to handle code embedding requests (supports various backends):</p>
+            <pre><code># Example: Start server on port 8080
+python llm_inference_server_cxe.py --port 8080</code></pre>
+
+            <h4 class="title is-5">3. Graph Construction</h4>
+            <p>Run the construction script to process APKs into attributed graphs:</p>
+            <pre><code>python create_graph.py --apk_dir ./path/to/apks --n_jobs 8 --port 8080</code></pre>
+            <p>
+              The <code>splits</code> directory contains the definitions for <strong style="color:#7851A9">MalNet-Tiny-Common</strong> and <strong style="color:#228B22">MalNet-Tiny-Distinct</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Training & Evaluation</h2>
+        <div class="content has-text-justified">
+          <p>
+            The <code>training</code> directory contains the Exphormer-based model implementation and evaluation scripts.
+          </p>
+          
+          <h3 class="title is-4">Data Structure</h3>
+          <p>Organize your datasets as follows in the <code>datasets/</code> folder:</p>
+          <pre><code>datasets/
+├── [dataset_name]/
+│   ├── raw/
+│   │   ├── malnet-graph-tiny/  (Graph structures)
+│   │   └── split_info_tiny/    (Train/Val/Test splits)
+│   └── processed/              (Generated automatically)</code></pre>
+          <p>If you download the dataset from our repository to the <code>processed</code> directory, you can skip the graph construction step.</p>
+
+          <h3 class="title is-4">Running Experiments</h3>
+          <p>To reproduce the results, use the provided configuration files:</p>
+          <pre><code>python main.py --cfg config_file.yaml</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Citation</h2>
+    <pre><code>@misc{tran2026quantifyinggeneralizationgapnew,
+      title={Quantifying the Generalization Gap: A New Benchmark for Out-of-Distribution Graph-Based Android Malware Classification}, 
+      author={Ngoc N. Tran and Anwar Said and Waseem Abbas and Tyler Derr and Xenofon D. Koutsoukos},
+      year={2026},
+      eprint={2508.06734},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2508.06734}, 
+}
+</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link" href="https://arxiv.org/abs/2508.06734">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/trannn/mntf-supp" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="font-size: small;">
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>.
+            Template adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
